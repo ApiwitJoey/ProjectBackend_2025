@@ -1,0 +1,34 @@
+@startuml
+skinparam Linetype ortho
+
+entity "Campground" as C {
+    *Campground_id : number <<generated>>
+    --
+    *Name : text
+    *address : text
+    *province : text
+    *telephone : text
+}
+
+entity "Reserve" as R {
+    *Reserve_id : number <<generated>>
+    --
+    * rDate : date
+    * user : ObjectId
+    * Campground : ObjectId
+    * CreateAt : date
+}
+
+entity "User" as U {
+    *User_id : number <<generated>>
+    --
+    *name : text
+    *telephone:text
+    *email:text <unique>
+    *password:text
+    *role:text
+}
+
+C ||..|{ R : Reserves
+U ||..|{ R : Makes
+@enduml
