@@ -1,11 +1,10 @@
-const { json } = require('express');
 const Campground = require('../models/Campground');
-const { param } = require('../routes/campgrounds');
 const Reserve = require('../models/Reserve');
 //@desc Get all hospitals
 //@route GET /api/v1/hospitals
 //@access Public
 exports.getCampgrounds = async (req, res, next) => {
+    try{
     let query;
 
     const reqQuery = {...req.query};
@@ -41,7 +40,7 @@ exports.getCampgrounds = async (req, res, next) => {
     const startIndex = (page-1)*limit;
     const endIndex = page*limit;
 
-    try {
+    
         const total = await Campground.countDocuments();
         query = query.skip(startIndex).limit(limit);
         //Executing query
@@ -63,6 +62,7 @@ exports.getCampgrounds = async (req, res, next) => {
         }
         res.status(200).json({ success: true, count: campgrounds.length,data:campgrounds});
     } catch (err) {
+        console.log(err);
         res.status(400).json({ success: false    });
     }
 };
