@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const hospitalSchema = new Schema({
+const CampgroundSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -13,38 +13,25 @@ const hospitalSchema = new Schema({
     type: String,
     required: true
   },
-  district: {
-    type: String,
-    required: true
-  },
   province: {
     type: String,
     required: true
   },
-  postalcode: {
-    type: String,
-    required: true,
-    maxlength: 5
-  },
   telephone: {
     type: String
-  },
-  region: {
-    type: String,
-    required: true
   }
 }, {
   toJSON : {virtuals:true},
   toObject : {virtuals:true}
 });
 
-hospitalSchema.virtual('appointments',{
-  ref:'Appointment',
+hospitalSchema.virtual('reserve',{
+  ref:'Reserve',
   localField:'_id',
-  foreignField:'hospital',
+  foreignField:'campground',
   justOne:false
 })
 
-const Hospital = mongoose.model('Hospital', hospitalSchema);
+const Campground = mongoose.model('Campground', CampgroundSchema);
 
-module.exports = Hospital;
+module.exports = Campground;
