@@ -10,7 +10,7 @@ const ReserveSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
-    Campground: {
+    campground: {
         type: mongoose.Schema.ObjectId,
         ref: 'Campground',
         required: true
