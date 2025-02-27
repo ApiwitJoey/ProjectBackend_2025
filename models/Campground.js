@@ -25,7 +25,7 @@ const CampgroundSchema = new Schema({
   toObject : {virtuals:true}
 });
 
-hospitalSchema.virtual('reserve',{
+CampgroundSchema.virtual('reserve',{
   ref:'Reserve',
   localField:'_id',
   foreignField:'campground',
