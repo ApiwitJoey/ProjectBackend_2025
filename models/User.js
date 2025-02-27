@@ -26,6 +26,11 @@ const UserSchema=new mongoose.Schema({
         minlength: 6,
         select: false
     },
+    telephone: {
+        type: String,
+        required: [true, 'Please add a telephone number'],
+        match: [/^\+?\d{1,4}?\d{7,14}$/, 'Please add a valid telephone number']
+    },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
     createdAt:{
