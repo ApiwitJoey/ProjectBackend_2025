@@ -29,7 +29,7 @@ const UserSchema=new mongoose.Schema({
     telephone: {
         type: String,
         required: [true, 'Please add a telephone number'],
-        match: [/^\+?\d{1,4}?\d{7,14}$/, 'Please add a valid telephone number']
+        match: [/^\d{2,3}-\d{7}$/, 'Please add a valid telephone number']
     },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
