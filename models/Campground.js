@@ -19,11 +19,7 @@ const CampgroundSchema = new Schema({
   },
   telephone: {
     type: String,
-<<<<<<< HEAD
-    
-=======
     required: true
->>>>>>> f8f9570d41eccf0c5bc46e4a220b206eea92da74
   }
 }, {
   toJSON : {virtuals:true},
