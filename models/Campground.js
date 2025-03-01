@@ -18,7 +18,8 @@ const CampgroundSchema = new Schema({
     required: true
   },
   telephone: {
-    type: String
+    type: String,
+    require:true
   }
 }, {
   toJSON : {virtuals:true},
