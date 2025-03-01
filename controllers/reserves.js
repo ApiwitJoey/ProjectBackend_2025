@@ -1,5 +1,6 @@
 const Reserve = require('../models/Reserve');
 const Campground = require('../models/Campground');
+const Log = require('../models/Log'); // Import Log model
 
 // Get all appointment
 //get api/v1/appointments
@@ -88,6 +89,13 @@ exports.addReserve = async (req,res,next) => {
         console.log(req.body);
         const reserve = await Reserve.create(req.body);
 
+        // Log reservation creation
+        await Log.create({
+            action: 'CREATE',
+            user: req.user.id,
+            reserve: reserve._id
+        });
+
         res.status(200).json({success:true,data :reserve});
     } catch (error) {
         console.log(error);
@@ -112,6 +120,13 @@ exports.updateReserve = async (req,res,next) => {
 
         reserve =  await Reserve.findByIdAndUpdate(req.params.id,req.body,{new:true,runValidators:true});
 
+        // Log reservation update
+        await Log.create({
+            action: 'UPDATE',
+            user: req.user.id,
+            reserve: reserve._id
+        });
+
         res.status(200).json({success:true,data:reserve});
     } catch (error) {
         console.log(error);
@@ -135,9 +150,17 @@ exports.deleteReserve = async (req,res,next) => {
 
         await reserve.deleteOne();  
 
+        // Log reservation deletion
+        await Log.create({
+            action: 'DELETE',
+            user: req.user.id,
+            reserve: req.params.id
+        });
+
         res.status(200).json({success:true,data:{}});
     } catch (error) {
         console.log(error);
         return res.status(500).json({success:false,message:"Cannot delete Reserve"});
     }
 };
+

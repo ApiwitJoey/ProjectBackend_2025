@@ -5,6 +5,7 @@ const connectDB = require('./config/db');
 const campgrounds = require('./routes/campgrounds');
 const reserves = require('./routes/reserves');
 const auth = require('./routes/auth');
+const logs = require('./routes/logs');
 const cookieParser = require('cookie-parser');
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
@@ -39,6 +40,7 @@ app.use(cors());
 app.use('/api/v1/campgrounds',campgrounds);
 app.use('/api/v1/reserves',reserves);
 app.use('/api/v1/auth',auth);
+app.use('/api/v1/logs', logs);
 app.use(cookieparser());
 
 
